@@ -40,9 +40,9 @@ jobs:
 
       - name: Terraform Apply
         id: apply
-        run: terraform apply -auto-approve
-        env:
-          TF_VAR_APPLICATION_URL: $(terraform output -raw application_url)
+        run: |
+          terraform apply -auto-approve
+          echo "TF_OUT_APPLICATION_URL=$(terraform output -raw application_url)" >> $GITHUB_ENV
     
       - name: Send a Slack Notification
         if: always()
@@ -51,6 +51,6 @@ jobs:
           status: ${{ job.status }}
           steps: ${{ toJson(steps) }}
           channel: '#github-actions'
-          message: "Application is available at: ${{ env.TF_VAR_APPLICATION_URL }}"
+          message: "Application is available at: ${{ env.TF_OUT_APPLICATION_URL }}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
