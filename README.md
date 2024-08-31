@@ -2,7 +2,7 @@
 
 This project demonstrates the deployment of a containerized application on AWS Fargate using Amazon ECS and Terraform. AWS Fargate, a serverless compute engine for containers, eliminates the need to manage EC2 instances, allowing developers to focus on building applications. Amazon ECS (Elastic Container Service) orchestrates Docker container deployments on AWS, providing scalability and flexibility. The project utilizes an image hosted on Docker Hub and deploys it via Terraform, automating the creation and management of infrastructure as code. Application Load Balancers (ALBs) are used to distribute incoming traffic to running tasks, enabling high availability and reliability. ALBs also provide features like SSL termination, path-based routing, and enhanced security, making them ideal for managing web-based applications.
 
-![intro](https://github.com/user-attachments/assets/cd06a5d4-e6dd-4a87-bb54-75d4035b4cfa)
+![intro](https://github.com/user-attachments/assets/32cb180c-a227-477d-b023-80e2eb5de2ba)
 
 ## Prerequisites
 
