@@ -1,3 +1,3 @@
-module "eks" {
+module "fargate" {
   source = "./modules/fargate"
 }
