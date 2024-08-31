@@ -26,11 +26,11 @@ This project demonstrates the deployment of a containerized application on AWS F
 
     To create a new role for manage AWS resource through EC2 Instance in AWS, start by navigating to the AWS Console and typing “IAM” to access the Identity and Access Management service. Click on “Roles,” then select “Create role.” Choose “AWS service” as the trusted entity and select “EC2” from the available services. Proceed to the next step and use the “Search” field to add the necessary permissions policies, such as "AdministratorAccess" or "AmazonEC2FullAccess", "AmazonS3FullAccess" and "AmazonECS_FullAccess", etc. After adding these permissions, click "Next." In the “Role name” field, enter “EC2 Instance Role” and complete the process by clicking “Create role”.
 
-   ![ec2-role-1]()![ec2-role-1](https://github.com/user-attachments/assets/6be1730a-f496-494b-8cda-4cc6d1b7e4c1)
+   ![ec2-role-1](https://github.com/user-attachments/assets/6be1730a-f496-494b-8cda-4cc6d1b7e4c1)
    
-   ![ec2-role-2]()![ec2-role-2](https://github.com/user-attachments/assets/e2ec28f8-3efe-4090-b1ec-89c2a6ffdc1b)
+   ![ec2-role-2](https://github.com/user-attachments/assets/e2ec28f8-3efe-4090-b1ec-89c2a6ffdc1b)
    
-   ![ec2-role-3]()![ec2-role-3](https://github.com/user-attachments/assets/557a0254-bd2c-4d33-9d47-fb43d29cae93)
+   ![ec2-role-3](https://github.com/user-attachments/assets/557a0254-bd2c-4d33-9d47-fb43d29cae93)
 
 
 2. #### Attach IAM Role
