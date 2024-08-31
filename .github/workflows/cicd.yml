@@ -1,0 +1,46 @@
+name: CI/CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["Terraform"]
+    types:
+      - completed
+    status: success
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: [self-hosted, git-workflow]
+    steps:
+      - name: Docker Pull
+        id: docker-pull
+        run: docker pull don361/super-mario-web:latest
+
+      - name: Image Scan
+        id: trivy-image-scan
+        run: |
+          trivy image don361/super-mario-web:latest > trivyimagedeploy.txt  
+          cat trivyimagedeploy.txt  
+
+      - name: Stop and Remove Old Container
+        run: |
+          docker stop mario || true
+          docker rm -f mario || true
+
+      - name: Deploy to Container
+        id: docker-deploy
+        run: docker run -d --name mario -p 3000:80 don361/super-mario-web:latest
+
+      - name: Prune Unused Docker Images
+        id: docker-prune
+        run: docker image prune -a -f
+  
+      - name: Send a Slack Notification
+        if: always()
+        uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: '#github-actions'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
