@@ -68,6 +68,17 @@ resource "aws_lb" "app_load_balancer" {
   subnets            = data.aws_subnets.public.ids
 }
 
+resource "aws_lb_listener" "http_listener" {
+  load_balancer_arn = aws_lb.app_load_balancer.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.app_target_group.arn
+  }
+}
+
 resource "aws_lb_target_group" "app_target_group" {
   name     = "app-target-group"
   port     = 80
@@ -83,17 +94,8 @@ resource "aws_lb_target_group" "app_target_group" {
     healthy_threshold    = 2
     unhealthy_threshold  = 2
   }
-}
 
-resource "aws_lb_listener" "http_listener" {
-  load_balancer_arn = aws_lb.app_load_balancer.arn
-  port              = 80
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.app_target_group.arn
-  }
+  depends_on = [aws_lb_listener.http_listener]
 }
 
 resource "aws_ecs_task_definition" "mario_task" {
